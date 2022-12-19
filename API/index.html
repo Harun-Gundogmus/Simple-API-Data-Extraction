@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class = "row">
+            <div class = "col">
+                <button class = "btn btn-primary mt-3" id = "veriCek">Veri Çek</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#ID</th>
+                  <th>Ad</th>
+                  <th>Soyad</th>
+                </tr>
+              </thead>
+              <tbody id="liste">
+              </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
+
+    <script>
+        const btnCek=document.querySelector("#veriCek");
+        const tbListe=document.querySelector("#liste");
+        btnCek.addEventListener("click",function(){
+            fetch('https://jsonplaceholder.typicode.com/todos') 
+                .then(cevap => cevap.json()) 
+                .then(veri => {
+                
+                    tbListe.innerHTML="";
+                
+                    veri.forEach(function(element,index){
+                        console.log(element);
+                        const satir = document.createElement("tr");
+                        const hucre1 = document.createElement("td");
+                        const hucre2 = document.createElement("td");
+                        const hucre3 = document.createElement("td");
+                        const hucre4 = document.createElement("td");
+                        
+                        hucre1.textContent=element.id
+                        hucre2.textContent=element.title
+                        hucre3.textContent=element.userId
+                        hucre4.textContent=element.completed
+                        
+                        satir.appendChild(hucre1)
+                        satir.appendChild(hucre2)
+                        satir.appendChild(hucre3)
+                        
+                        tbListe.appendChild(satir)
+                    });
+                    
+                });
+        });
+    </script>
+</body>
+</html>
